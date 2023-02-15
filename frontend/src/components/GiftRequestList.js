@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export default function GiftRequestList() {
 
     const [gifts, setGifts] = useState(null)
+    const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchGifts = async () => {
-            const response = await fetch('/api/gifts')
+            const response = await fetch('/api/gifts', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             if (response.ok) {
@@ -14,8 +20,10 @@ export default function GiftRequestList() {
             }
         }
 
-        fetchGifts()
-    }, [])
+        if (user) {
+            fetchGifts()
+        }
+    }, [user])
 
     return (
         <>

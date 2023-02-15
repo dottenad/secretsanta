@@ -3,27 +3,36 @@ import MyGiftRequestList from '../components/MyGiftRequestList'
 import { useGiftsContext } from '../hooks/useGiftsContext'
 import Gift from './CreateGift'
 import { useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export default function Gifts() {
 
     const { gifts, dispatch } = useGiftsContext()
+    const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchGifts = async () => {
-            const response = await fetch('/api/gifts')
+            const response = await fetch('/api/gifts', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await response.json()
 
             if (response.ok) {
                 dispatch({ type: 'SET_GIFTS', payload: json })
             }
         }
-        fetchGifts()
-    }, [])
+
+        if (user) {
+            fetchGifts()
+        }
+
+    }, [dispatch, user])
 
     return (
         <>
             <Subheader text="My Gift Requests" />
-
             <div className="mx-auto max-w-3xl px-4 sm:px-6 mt-8 grid grid-cols-1 gap-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
                 <div className="space-y-6 lg:col-span-2 lg:col-start-1">
                     <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">

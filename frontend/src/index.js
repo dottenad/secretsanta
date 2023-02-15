@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  Navigate
 } from "react-router-dom";
+import { useAuthContext } from './hooks/useAuthContext';
 import './App.css';
 import { AuthContextProvider } from './context/AuthContext';
 import App from "./App";
@@ -13,8 +15,6 @@ import Login from "./pages/Login";
 import Gifts from "./pages/Gifts";
 import Groups from "./pages/groups/Groups";
 import CreateGroup from './pages/groups/Create';
-
-document.getElementById("root").style.minHeight = '100%';
 
 const router = createBrowserRouter(
   [

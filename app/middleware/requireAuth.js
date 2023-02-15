@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
 const requireAuth = async (req, res, next) => {
-
-    // verify authentication
+    // verify user is authenticated
     const { authorization } = req.headers
 
     if (!authorization) {
@@ -20,9 +19,8 @@ const requireAuth = async (req, res, next) => {
 
     } catch (error) {
         console.log(error)
-        res.status(401).json({ error: 'request is not authorized' })
+        res.status(401).json({ error: 'Request is not authorized' })
     }
-
 }
 
 module.exports = requireAuth

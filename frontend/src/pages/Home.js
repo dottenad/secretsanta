@@ -33,6 +33,7 @@ export default function Home() {
             {gifts && gifts.map((gift) => (
                 <p key={gift._id}>{gift.title}</p>
             ))}
+
             <Gift />
         </>
     )
