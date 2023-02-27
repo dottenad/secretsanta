@@ -14,6 +14,10 @@ const giftSchema = new Schema({
     url: {
         type: String,
         required: false
+    },
+    user_id: {
+        type: String,
+        require: true
     }
 }, { timestamps: true })
 

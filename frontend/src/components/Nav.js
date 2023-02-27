@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -14,6 +15,10 @@ export default function Example() {
     const handleClick = () => {
         logout()
     }
+
+    let activeClassName = "inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900";
+
+    let inactiveClassName = "inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
 
     return (
         <Disclosure as="nav" className="bg-white shadow">
@@ -51,24 +56,30 @@ export default function Example() {
                                 </div>
                                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                                     {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                                    <Link
+                                    <NavLink
                                         to="/"
-                                        className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+                                        className={({ isActive }) =>
+                                            isActive ? activeClassName : inactiveClassName
+                                        }
                                     >
                                         Home
-                                    </Link>
-                                    <Link
+                                    </NavLink>
+                                    <NavLink
                                         to="/gifts"
-                                        className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                        className={({ isActive }) =>
+                                            isActive ? activeClassName : inactiveClassName
+                                        }
                                     >
                                         Gifts
-                                    </Link>
-                                    <Link
+                                    </NavLink>
+                                    <NavLink
                                         to="/groups"
-                                        className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                        className={({ isActive }) =>
+                                            isActive ? activeClassName : inactiveClassName
+                                        }
                                     >
                                         Groups
-                                    </Link>
+                                    </NavLink>
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

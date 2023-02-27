@@ -1,8 +1,8 @@
 import {
-    BrowserRouter,
     Routes,
     Route,
-    Navigate
+    Navigate,
+    BrowserRouter
 } from "react-router-dom";
 import { useAuthContext } from './hooks/useAuthContext'
 import Nav from './components/Nav'
@@ -13,15 +13,15 @@ import Gifts from "./pages/Gifts";
 import Groups from "./pages/groups/Groups";
 import CreateGroup from './pages/groups/Create';
 
-export default function App() {
+function App() {
     const { user } = useAuthContext()
     return (
         <>
-            <BrowserRouter>
-                <html className="h-full bg-gray-100">
-                    <body className="h-full">
-                        <div className="min-h-screen">
-                            <Nav />
+            <html className="h-full bg-gray-100">
+                <body className="h-full">
+                    <div className="min-h-screen">
+                        <BrowserRouter>
+                            {user ? <Nav /> : null}
                             <main className="py-10">
                                 <Routes>
                                     <Route
@@ -30,15 +30,15 @@ export default function App() {
                                     />
                                     <Route
                                         path="/gifts"
-                                        element={<Gifts />}
+                                        element={user ? <Gifts /> : <Navigate to="/login" />}
                                     />
                                     <Route
                                         path="/groups"
-                                        element={<Groups />}
+                                        element={user ? <Groups /> : <Navigate to="/login" />}
                                     />
                                     <Route
                                         path="/groups/create"
-                                        element={<CreateGroup />}
+                                        element={user ? <CreateGroup /> : <Navigate to="/login" />}
                                     />
                                     <Route
                                         path="/login"
@@ -50,10 +50,12 @@ export default function App() {
                                     />
                                 </Routes>
                             </main>
-                        </div>
-                    </body>
-                </html >
-            </BrowserRouter>
+                        </BrowserRouter>
+                    </div>
+                </body>
+            </html >
         </>
     )
 }
+
+export default App;

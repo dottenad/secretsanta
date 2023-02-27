@@ -6,7 +6,8 @@ const getGift = (req, res) => {
 }
 
 const getGifts = async (req, res) => {
-    const gifts = await Gift.find({}).sort({ createdAt: -1 })
+    const user_id = req.user._id
+    const gifts = await Gift.find({ user_id }).sort({ createdAt: -1 })
     res.status(200).json(gifts)
 }
 
@@ -16,7 +17,8 @@ const createGift = async (req, res) => {
 
     //add doc to db
     try {
-        const gift = await Gift.create({ title, price, url })
+        const user_id = req.user._id
+        const gift = await Gift.create({ title, price, url, user_id })
         res.status(200).json(gift)
     } catch (error) {
         res.status(400).json({ error: error.message })
