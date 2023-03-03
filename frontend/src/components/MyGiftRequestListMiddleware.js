@@ -59,7 +59,6 @@ export default function Gifts() {
                                         {gifts && gifts.map((gift) => (
                                             <MyGiftRequestList key={gift._id} gift={gift} />
                                         ))}
-
                                     </tbody>
                                 </table>
                             </div>

@@ -65,7 +65,7 @@ export default function Example() {
                                         Home
                                     </NavLink>
                                     <NavLink
-                                        to="/gifts"
+                                        to="gifts"
                                         className={({ isActive }) =>
                                             isActive ? activeClassName : inactiveClassName
                                         }
@@ -73,7 +73,7 @@ export default function Example() {
                                         Gifts
                                     </NavLink>
                                     <NavLink
-                                        to="/groups"
+                                        to="groups"
                                         className={({ isActive }) =>
                                             isActive ? activeClassName : inactiveClassName
                                         }

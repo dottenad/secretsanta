@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', true);
 const giftRoutes = require('./routes/gifts')
+const groupRoutes = require('./routes/groups')
 const userRoutes = require('./routes/user')
 var cors = require('cors');
 
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(__dirname + '/public'));
 app.use('/api/gifts', giftRoutes)
+app.use('/api/groups', groupRoutes)
 app.use('/api/user', userRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
@@ -29,5 +31,5 @@ mongoose.connect(process.env.MONGO_URI)
         })
     })
     .catch((error) => {
-        console.log('error')
+        console.log(error)
     })

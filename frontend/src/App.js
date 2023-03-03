@@ -2,7 +2,8 @@ import {
     Routes,
     Route,
     Navigate,
-    BrowserRouter
+    BrowserRouter,
+    Link
 } from "react-router-dom";
 import { useAuthContext } from './hooks/useAuthContext'
 import Nav from './components/Nav'
@@ -25,28 +26,34 @@ function App() {
                             <main className="py-10">
                                 <Routes>
                                     <Route
-                                        path="/"
-                                        element={user ? <Index /> : <Navigate to="/login" />}
+                                        exact
+                                        index
+                                        element={<Index />}
                                     />
                                     <Route
-                                        path="/gifts"
-                                        element={user ? <Gifts /> : <Navigate to="/login" />}
+                                        exact
+                                        path="gifts"
+                                        element={<Gifts />}
                                     />
                                     <Route
-                                        path="/groups"
-                                        element={user ? <Groups /> : <Navigate to="/login" />}
+                                        exact
+                                        path="groups"
+                                        element={<Groups />}
                                     />
                                     <Route
-                                        path="/groups/create"
-                                        element={user ? <CreateGroup /> : <Navigate to="/login" />}
+                                        exact
+                                        path="groups/create"
+                                        element={<CreateGroup />}
                                     />
                                     <Route
-                                        path="/login"
-                                        element={!user ? <Login /> : <Navigate to="/" />}
+                                        exact
+                                        path="login"
+                                        element={<Login />}
                                     />
                                     <Route
-                                        path="/signup"
-                                        element={!user ? <Signup /> : <Navigate to="/" />}
+                                        exact
+                                        path="signup"
+                                        element={<Signup />}
                                     />
                                 </Routes>
                             </main>
